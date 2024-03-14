@@ -44,21 +44,23 @@ function App() {
               .then(() => {
                 fetchData()
                   .then((res) => {
-                    const totalItems = res.result.length;
+                    if (res.result != null) {
+                      const totalItems = res.result.length;
 
-                    let newCurrentPage = currentPage;
+                      let newCurrentPage = currentPage;
 
-                    // If current page has no data and it's not the 1st page,
-                    // navigate to the previous page
-                    if (
-                      currentPage > 0 &&
-                      currentPage * perPage >= totalItems
-                    ) {
-                      newCurrentPage = currentPage - 1;
+                      if (
+                        currentPage > 0 &&
+                        currentPage * perPage === totalItems
+                      ) {
+                        newCurrentPage = currentPage - 1;
+                      }
+                      setCurrentPage(newCurrentPage);
+
+                      setData(res);
+                    } else {
+                      setData();
                     }
-
-                    setCurrentPage(newCurrentPage);
-                    setData(res);
                   })
                   .catch((error) => {
                     console.error("Error fetching data after deletion:", error);
@@ -187,6 +189,7 @@ function App() {
                   nextLinkClassName={"page-link"}
                   activeClassName={"active"}
                   breakClassName={"page-item"}
+                  forcePage={currentPage}
                   breakLinkClassName={"page-link"}
                 />
               </div>

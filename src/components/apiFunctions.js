@@ -60,8 +60,8 @@ export const putData = async (_id, newData) => {
       throw new Error("Failed to edit data");
     }
 
-    const data = await response.json();
-    return data;
+    // const data = await response.json();
+    return;
   } catch (errorMessage) {
     throw new Error("Failed to edit data");
   }

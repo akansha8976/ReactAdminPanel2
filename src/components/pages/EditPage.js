@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../Loading";
 
 function EditPage({ item }) {
+  const [errorMessage1, setErrorMessage1] = useState("");
   const [isAddingData, setIsAddingData] = useState(false); // State to track button click
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ function EditPage({ item }) {
     } else if (trimmedDescription.length < 4) {
       setErrorMessage("At least 4 alphabets required");
     } else if (trimmedDescription.length > 15) {
-      setErrorMessage("not more than 15 alphabets..");
+      setErrorMessage("Not more than 15 alphabets..");
     } else if (
       trimmedDescription.match(specialCharacters) ||
       trimmedDescription.match(numbers)
@@ -58,12 +59,18 @@ function EditPage({ item }) {
         alert("Edit Data successfully");
         navigate("/fetchapi");
       } catch (error) {
-        console.error("An error occurred while editing data:", error);
+        if (error.response && error.response.status === 404) {
+          setErrorMessage1("Resource not found");
+        } else {
+          console.error("An error occurred while editing data:", error);
+        }
       }
     }
 
     setIsAddingData(false);
   };
+  if (errorMessage1)
+    return <h1 className="text-center m-5">Error : {errorMessage1}</h1>;
 
   return (
     <>
@@ -102,10 +109,10 @@ function EditPage({ item }) {
                         <div className="p-5 ">
                           <button
                             onClick={editFunction}
-                            disabled={isAddingData} // Disable button when it is clicked
+                            disabled={isAddingData} // Disable button
                             className="btn btn-primary btn-user btn-block rounded-pill"
                           >
-                            Edit Data
+                            {isAddingData ? "Editing Data..." : "Edit Data"}
                           </button>
                         </div>
                         {loading === true ? (
