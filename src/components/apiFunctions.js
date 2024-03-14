@@ -19,13 +19,16 @@ export const fetchData = () => {
 };
 
 export const deleteUser = (_id) => {
-  return fetch(`${apiUrl}/${_id}`, {
-    method: "DELETE",
-  })
-    .then((result) => result.json())
-    .catch((error) => {
-      throw new Error("Error occurred while deleting user");
-    });
+  return (
+    fetch(`${apiUrl}/${_id}`, {
+      method: "DELETE",
+    })
+      .then((result) => result.json())
+      // .then()
+      .catch((error) => {
+        throw new Error("Error occurred while deleting user");
+      })
+  );
 };
 
 export const postData = (data) => {

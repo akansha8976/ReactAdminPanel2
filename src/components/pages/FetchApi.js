@@ -33,13 +33,16 @@ function App() {
       buttons: [
         {
           label: "Yes",
+
           onClick: () => {
+            setLoading(true);
+            setData();
             deleteUser(_id)
               .then(() => {
                 fetchData()
-                  .then(() => {
-                    alert("Data Deleted Successfully..");
-                    window.location.reload();
+                  .then((res) => {
+                    setData(res);
+                    setLoading(false);
                   })
                   .catch((error) => {
                     console.error("Error fetching data after deletion:", error);
