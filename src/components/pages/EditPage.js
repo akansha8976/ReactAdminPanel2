@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { putData } from "../apiFunctions";
 import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../Loading";
+
 function EditPage({ item }) {
+  const [isAddingData, setIsAddingData] = useState(false); // State to track button click
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
@@ -10,6 +12,7 @@ function EditPage({ item }) {
   const navigate = useNavigate();
   var specialCharacters = /[$&+,:;=?@#|'<>.^*()%!-]/;
   var numbers = /[0-9]/g;
+
   const getProductDetails = async () => {
     let result = await fetch(
       `https://curd-demo-omega.vercel.app/api/posts/${params._id}`
@@ -20,32 +23,46 @@ function EditPage({ item }) {
     setDescription(result.result.description);
     setLoading(false);
   };
+
   useEffect(() => {
     setLoading(true);
     getProductDetails();
   }, []);
 
   const editFunction = async () => {
-    if (description.length == "") {
-      setErrorMessage("Empty not allowed");
-    } else if (description.length < 4) {
-      setErrorMessage("At least 4  alphabets required..");
+    // If button is already clicked, return
+    if (isAddingData) {
+      return;
+    }
+
+    // Set button to clicked state
+    setIsAddingData(true);
+
+    const trimmedDescription = description.trim(); // Trim the input description so white sapaces not add
+
+    if (!trimmedDescription) {
+      setErrorMessage("Empty description is not allowed");
+    } else if (trimmedDescription.length < 4) {
+      setErrorMessage("At least 4 alphabets required");
     } else if (
-      description.match(specialCharacters) ||
-      description.match(numbers)
+      trimmedDescription.match(specialCharacters) ||
+      trimmedDescription.match(numbers)
     ) {
-      setErrorMessage("Only alphabets Required..");
+      setErrorMessage("Only alphabets are allowed");
     } else {
       try {
         setErrorMessage("");
-        await putData(params._id, { description });
+        await putData(params._id, { description: trimmedDescription }); // Use the trimmed description
         alert("Edit Data successfully");
         navigate("/fetchapi");
       } catch (error) {
         console.error("An error occurred while editing data:", error);
       }
     }
+
+    setIsAddingData(false);
   };
+
   return (
     <>
       <div className="container ">
@@ -59,12 +76,6 @@ function EditPage({ item }) {
                     <div className="p-5">
                       <div className="text-center mt-5">
                         <h1 className="h4 text-gray-900 mb-4 ">Edit Page!</h1>
-                        {loading === true ? (
-                          <div className=" my-3">
-                            {" "}
-                            <Loading />
-                          </div>
-                        ) : null}
                       </div>
                       <div className="user">
                         <div className="form-group ">
@@ -89,11 +100,18 @@ function EditPage({ item }) {
                         <div className="p-5 ">
                           <button
                             onClick={editFunction}
+                            disabled={isAddingData} // Disable button when it is clicked
                             className="btn btn-primary btn-user btn-block rounded-pill"
                           >
                             Edit Data
                           </button>
                         </div>
+                        {loading === true ? (
+                          <div className=" my-3">
+                            {" "}
+                            <Loading />
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   </div>

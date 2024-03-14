@@ -19,16 +19,11 @@ export const fetchData = () => {
 };
 
 export const deleteUser = (_id) => {
-  return (
-    fetch(`${apiUrl}/${_id}`, {
-      method: "DELETE",
-    })
-      .then((result) => result.json())
-      // .then()
-      .catch((error) => {
-        throw new Error("Error occurred while deleting user");
-      })
-  );
+  return fetch(`${apiUrl}/${_id}`, {
+    method: "DELETE",
+  }).catch((error) => {
+    throw new Error("Error occurred while deleting user");
+  });
 };
 
 export const postData = (data) => {
@@ -46,8 +41,8 @@ export const postData = (data) => {
       }
       return response.json();
     })
-    .catch((error) => {
-      throw new Error(error.message);
+    .catch((errorMessage) => {
+      throw new Error("Failed to add data");
     });
 };
 
@@ -67,7 +62,7 @@ export const putData = async (_id, newData) => {
 
     const data = await response.json();
     return data;
-  } catch (error) {
-    throw new Error(error.message);
+  } catch (errorMessage) {
+    throw new Error("Failed to edit data");
   }
 };

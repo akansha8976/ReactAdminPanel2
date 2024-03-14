@@ -1,60 +1,75 @@
 import React, { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
 import { postData } from "../apiFunctions";
+
 function HelloPage() {
+  const [isAddingData, setIsAddingData] = useState(false); // State to track button click
   const [description, setDescription] = useState("");
-  const [error, setError] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   var specialCharacters = /[$&+,:;=?@#|'<>.^*()%!-]/;
   var numbers = /[0-9]/g;
   const navigate = useNavigate();
+
   function saveUser(e) {
     e.preventDefault();
-    let data = { description };
 
-    if (description.length == "") {
+    // If button is already clicked, return
+    if (isAddingData) {
+      return;
+    }
+
+    // Set button to clicked state
+    setIsAddingData(true);
+    let trimmedDescription = description.trim(); // Trim the input description
+
+    if (!trimmedDescription) {
       setErrorMessage("Required description");
-    } else if (description.length < 4) {
-      setErrorMessage("At least 4  alphabets required..");
+      setIsAddingData(false); // Reset button state
+    } else if (trimmedDescription.length < 4) {
+      setErrorMessage("At least 4 alphabets required..");
+      setIsAddingData(false); // Reset button state
     } else if (
-      description.match(specialCharacters) ||
-      description.match(numbers)
+      trimmedDescription.match(specialCharacters) ||
+      trimmedDescription.match(numbers)
     ) {
       setErrorMessage("Only alphabets Required..");
+      setIsAddingData(false); // Reset button state
     } else {
       setErrorMessage("");
+      let data = { description: trimmedDescription }; // Use the trimmed description
       postData(data)
         .then(() => {
           alert("Data added successfully");
-          setDescription("");
+          setDescription(""); // Clear input after successful submission
           navigate("/fetchapi");
         })
         .catch((error) => {
           console.error("An error occurred:", error);
+        })
+        .finally(() => {
+          setIsAddingData(false); // Reset button state after operation
         });
     }
   }
 
-  if (error) return <p>Error: {error.message}</p>;
   return (
-    <div class="container ">
-      <div class="row justify-content-center ">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-          <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-              <div class="row " style={{ height: "500px" }}>
-                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                <div class="col-lg-6">
-                  <div class="p-5">
-                    <div class="text-center mt-5">
-                      <h1 class="h4 text-gray-900 mb-4 ">Create Page!</h1>
+    <div className="container ">
+      <div className="row justify-content-center ">
+        <div className="col-xl-10 col-lg-12 col-md-9">
+          <div className="card o-hidden border-0 shadow-lg my-5">
+            <div className="card-body p-0">
+              <div className="row " style={{ height: "500px" }}>
+                <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                <div className="col-lg-6">
+                  <div className="p-5">
+                    <div className="text-center mt-5">
+                      <h1 className="h4 text-gray-900 mb-4 ">Create Page!</h1>
                     </div>
-                    <form class="user">
-                      <div class="form-group">
+                    <form className="user">
+                      <div className="form-group">
                         <input
                           type="text"
-                          class="form-control form-control-user mt-5"
+                          className="form-control form-control-user mt-5"
                           name="description"
                           placeholder="Enter Description..."
                           onChange={(e) => {
@@ -64,7 +79,6 @@ function HelloPage() {
                         />
                         {errorMessage && (
                           <p style={{ color: "red" }} className="mt-2">
-                            {" "}
                             {errorMessage}
                           </p>
                         )}
@@ -72,9 +86,10 @@ function HelloPage() {
 
                       <button
                         onClick={saveUser}
-                        class="btn btn-primary btn-user btn-block mt-5"
+                        disabled={isAddingData} // Disable button only when data is being added
+                        className="btn btn-primary btn-user btn-block mt-5"
                       >
-                        Add Data
+                        {isAddingData ? "Adding Data..." : "Add Data"}
                       </button>
                     </form>
                   </div>
