@@ -44,6 +44,8 @@ function EditPage({ item }) {
       setErrorMessage("Empty description is not allowed");
     } else if (trimmedDescription.length < 4) {
       setErrorMessage("At least 4 alphabets required");
+    } else if (trimmedDescription.length > 15) {
+      setErrorMessage("not more than 15 alphabets..");
     } else if (
       trimmedDescription.match(specialCharacters) ||
       trimmedDescription.match(numbers)

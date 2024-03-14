@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { postData } from "../apiFunctions";
 
 function HelloPage() {
-  const [isAddingData, setIsAddingData] = useState(false); // State to track button click
+  const [isAddingData, setIsAddingData] = useState(false); // State for button click
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   var specialCharacters = /[$&+,:;=?@#|'<>.^*()%!-]/;
@@ -27,27 +27,30 @@ function HelloPage() {
       setIsAddingData(false); // Reset button state
     } else if (trimmedDescription.length < 4) {
       setErrorMessage("At least 4 alphabets required..");
-      setIsAddingData(false); // Reset button state
+      setIsAddingData(false);
+    } else if (trimmedDescription.length > 15) {
+      setErrorMessage("Not more than 15 alphabets..");
+      setIsAddingData(false);
     } else if (
       trimmedDescription.match(specialCharacters) ||
       trimmedDescription.match(numbers)
     ) {
       setErrorMessage("Only alphabets Required..");
-      setIsAddingData(false); // Reset button state
+      setIsAddingData(false);
     } else {
       setErrorMessage("");
-      let data = { description: trimmedDescription }; // Use the trimmed description
+      let data = { description: trimmedDescription }; // Use trimmed description
       postData(data)
         .then(() => {
           alert("Data added successfully");
-          setDescription(""); // Clear input after successful submission
+          setDescription(""); // Clear input field
           navigate("/fetchapi");
         })
         .catch((error) => {
           console.error("An error occurred:", error);
         })
         .finally(() => {
-          setIsAddingData(false); // Reset button state after operation
+          setIsAddingData(false); // Reset button after operation
         });
     }
   }
@@ -86,7 +89,7 @@ function HelloPage() {
 
                       <button
                         onClick={saveUser}
-                        disabled={isAddingData} // Disable button only when data is being added
+                        disabled={isAddingData} // Disable button only when data added
                         className="btn btn-primary btn-user btn-block mt-5"
                       >
                         {isAddingData ? "Adding Data..." : "Add Data"}
