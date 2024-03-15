@@ -13,12 +13,11 @@ function HelloPage() {
   function saveUser(e) {
     e.preventDefault();
 
-    // If button is already clicked, return
     if (isAddingData) {
       return;
     }
 
-    // Set button to clicked state
+    // Set button to clicked
     setIsAddingData(true);
     let trimmedDescription = description.trim(); // Trim the input description
 

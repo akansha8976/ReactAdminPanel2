@@ -32,7 +32,7 @@ function AreaChart() {
               Earnings Overview
             </h6>
 
-            <GraphDropDown />
+            <GraphDropDown id="dropdown1" />
           </div>
 
           <div className="card-body">
