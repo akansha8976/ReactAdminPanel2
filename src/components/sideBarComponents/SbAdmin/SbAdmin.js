@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
+import Loading from "../../Loading";
 import { Link } from "react-router-dom";
 import {
   pagesData1,
   utilityData,
   pagesData2,
   componentsData,
-} from "./SbAdminData";
-import NavLinks from "./NavLinks";
+} from "../SbAdminComponents/SbAdminData";
+import NavLinks from "../SbAdminComponents/NavLinks";
 import SidebarDropDown from "./SidebarDropDown";
 function SbAdmin() {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const toggleOpen = () => {
     setOpen(!open);
   };
@@ -37,12 +39,14 @@ function SbAdmin() {
     document.addEventListener("mousedown", handler);
   });
 
+  const handleImageLoad = () => {
+    setLoading(false);
+  };
   return (
     <>
       <ul
         className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
         id="accordionSidebar"
-        // ref={dropdownRef}
       >
         {/* <!-- Sidebar - Brand --> */}
         <Link
@@ -169,7 +173,7 @@ function SbAdmin() {
           route="addpage"
         />
 
-        <NavLinks icon="fas fa-fw fa-table" name="Table" route="/fetchapi" />
+        <NavLinks icon="fas fa-fw fa-table" name="Table" route="/get" />
 
         {/* <!-- Divider --> */}
         <hr className="sidebar-divider d-none d-md-block" />
@@ -182,10 +186,14 @@ function SbAdmin() {
         </div>
 
         <div className="sidebar-card d-none d-lg-flex">
+          {loading && <Loading />}
           <img
-            className="sidebar-card-illustration mb-2"
+            className={`sidebar-card-illustration mb-2 ${
+              loading ? "d-none" : ""
+            }`}
             src="img/undraw_rocket.svg"
             alt="..."
+            onLoad={handleImageLoad}
           />
           <p className="text-center mb-2">
             <strong>SB Admin Pro</strong> is packed with premium features,

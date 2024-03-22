@@ -1,7 +1,7 @@
 import React from "react";
-import AlertCenter from "./AlertCenter";
-import MessageCenter from "./MessageCenter";
-import ProfileSection from "./ProfileSection";
+import AlertCenter from "../topNavBarComponents/AlertCenter";
+import MessageCenter from "../topNavBarComponents/MessageCenter";
+import ProfileSection from "../topNavBarComponents/ProfileSection";
 
 function AlertIcons() {
   return (

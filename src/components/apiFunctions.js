@@ -1,6 +1,6 @@
 const apiUrl = "https://curd-demo-omega.vercel.app/api/posts";
 
-export const fetchData = () => {
+export const getPost = () => {
   return fetch(apiUrl, {
     method: "GET",
     headers: {
@@ -18,7 +18,7 @@ export const fetchData = () => {
     });
 };
 
-export const deleteUser = (_id) => {
+export const deletePost = (_id) => {
   return fetch(`${apiUrl}/${_id}`, {
     method: "DELETE",
   }).catch((error) => {
@@ -26,7 +26,7 @@ export const deleteUser = (_id) => {
   });
 };
 
-export const postData = (data) => {
+export const savePost = (data) => {
   return fetch(apiUrl, {
     method: "POST",
     headers: {
@@ -46,7 +46,7 @@ export const postData = (data) => {
     });
 };
 
-export const putData = async (_id, newData) => {
+export const editPost = async (_id, newData) => {
   try {
     const response = await fetch(`${apiUrl}/${_id}`, {
       method: "PUT",

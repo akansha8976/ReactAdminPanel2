@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { putData } from "../apiFunctions";
+import { editPost } from "../../components/apiFunctions";
 import { useParams, useNavigate } from "react-router-dom";
-import Loading from "../Loading";
 
-function EditPage({ item }) {
+function EditPage({ itemId, onClose, tempDescription }) {
   const [errorMessage1, setErrorMessage1] = useState("");
-  const [isAddingData, setIsAddingData] = useState(false); // State to track button click
+  const [isAddingData, setIsAddingData] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState("");
   const params = useParams();
-  const navigate = useNavigate();
+
   var specialCharacters = /[$&+,:;=?@#|'<>.^*()%!-]/;
   var numbers = /[0-9]/g;
 
@@ -21,25 +19,21 @@ function EditPage({ item }) {
 
     result = await result.json();
 
-    setDescription(result.result.description);
-    setLoading(false);
+    setDescription(tempDescription);
   };
 
   useEffect(() => {
-    setLoading(true);
     getProductDetails();
   }, []);
 
   const editFunction = async () => {
-    // If button is already clicked, return
     if (isAddingData) {
       return;
     }
 
-    // Set button to clicked state
     setIsAddingData(true);
 
-    const trimmedDescription = description.trim(); // Trim the input description so white sapaces not add
+    const trimmedDescription = description.trim();
 
     if (!trimmedDescription) {
       setErrorMessage("Empty description is not allowed");
@@ -55,9 +49,11 @@ function EditPage({ item }) {
     } else {
       try {
         setErrorMessage("");
-        await putData(params._id, { description: trimmedDescription }); // Use the trimmed description
-        alert("Edit Data successfully");
-        navigate("/fetchapi");
+
+        await editPost(itemId, { description: trimmedDescription });
+
+        onClose();
+        window.location.reload();
       } catch (error) {
         if (error.response && error.response.status === 404) {
           setErrorMessage1("Resource not found");
@@ -76,15 +72,20 @@ function EditPage({ item }) {
     <>
       <div className="container ">
         <div className="row justify-content-center ">
-          <div className="col-xl-10 col-lg-12 col-md-9">
+          <div className="col-xl-6 col-lg-12 col-md-9">
             <div className="card o-hidden border-0 shadow-lg my-5">
               <div className="card-body p-0">
-                <div className="row " style={{ height: "500px" }}>
-                  <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                  <div className="col-lg-6">
+                <div className="row " style={{ height: "350px" }}>
+                  <i
+                    className="fa-solid fa-xmark text-end me-2"
+                    onClick={onClose}
+                  />
+                  <div className="col-lg-10 ms-5">
                     <div className="p-5">
-                      <div className="text-center mt-5">
-                        <h1 className="h4 text-gray-900 mb-4 ">Edit Page!</h1>
+                      <div className="text-center ">
+                        <h1 className="h4 text-gray-900 mb-4 text-center">
+                          Edit Page!
+                        </h1>
                       </div>
                       <div className="user">
                         <div className="form-group ">
@@ -108,19 +109,13 @@ function EditPage({ item }) {
 
                         <div className="p-5 ">
                           <button
-                            onClick={editFunction}
+                            onClick={(e) => editFunction(e, onClose)}
                             disabled={isAddingData} // Disable button
                             className="btn btn-primary btn-user btn-block rounded-pill"
                           >
                             {isAddingData ? "Editing Data..." : "Edit Data"}
                           </button>
                         </div>
-                        {loading === true ? (
-                          <div className=" my-3">
-                            {" "}
-                            <Loading />
-                          </div>
-                        ) : null}
                       </div>
                     </div>
                   </div>

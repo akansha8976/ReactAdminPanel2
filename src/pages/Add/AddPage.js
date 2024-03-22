@@ -1,29 +1,26 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { postData } from "../apiFunctions";
 
-function HelloPage() {
-  const [isAddingData, setIsAddingData] = useState(false); // State for button click
+import { savePost } from "../../components/apiFunctions";
+function HelloPage({ onClose }) {
+  const [isAddingData, setIsAddingData] = useState(false);
   const [description, setDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   var specialCharacters = /[$&+,:;=?@#|'<>.^*()%!-]/;
   var numbers = /[0-9]/g;
-  const navigate = useNavigate();
 
-  function saveUser(e) {
+  function saveUser(e, onClose) {
     e.preventDefault();
 
     if (isAddingData) {
       return;
     }
 
-    // Set button to clicked
     setIsAddingData(true);
-    let trimmedDescription = description.trim(); // Trim the input description
+    let trimmedDescription = description.trim();
 
     if (!trimmedDescription) {
       setErrorMessage("Required description");
-      setIsAddingData(false); // Reset button state
+      setIsAddingData(false);
     } else if (trimmedDescription.length < 4) {
       setErrorMessage("At least 4 alphabets required..");
       setIsAddingData(false);
@@ -38,18 +35,18 @@ function HelloPage() {
       setIsAddingData(false);
     } else {
       setErrorMessage("");
-      let data = { description: trimmedDescription }; // Use trimmed description
-      postData(data)
+      let data = { description: trimmedDescription };
+      savePost(data)
         .then(() => {
-          alert("Data added successfully");
-          setDescription(""); // Clear input field
-          navigate("/fetchapi");
+          setDescription("");
+          onClose();
+          window.location.reload();
         })
         .catch((error) => {
           console.error("An error occurred:", error);
         })
         .finally(() => {
-          setIsAddingData(false); // Reset button after operation
+          setIsAddingData(false);
         });
     }
   }
@@ -57,15 +54,21 @@ function HelloPage() {
   return (
     <div className="container ">
       <div className="row justify-content-center ">
-        <div className="col-xl-10 col-lg-12 col-md-9">
+        <div className="col-xl-6 col-lg-12 col-md-9 ">
           <div className="card o-hidden border-0 shadow-lg my-5">
-            <div className="card-body p-0">
-              <div className="row " style={{ height: "500px" }}>
-                <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                <div className="col-lg-6">
+            <div className="card-body p-0 ">
+              <div className="row " style={{ height: "350px" }}>
+                <i
+                  className="fa-solid fa-xmark text-end me-2"
+                  onClick={onClose}
+                />
+
+                <div className="col-lg-10 ms-5">
                   <div className="p-5">
-                    <div className="text-center mt-5">
-                      <h1 className="h4 text-gray-900 mb-4 ">Create Page!</h1>
+                    <div className="text-center ">
+                      <h1 className="h4 text-gray-900 mb-4 text-center">
+                        Create Page!
+                      </h1>
                     </div>
                     <form className="user">
                       <div className="form-group">
@@ -87,8 +90,8 @@ function HelloPage() {
                       </div>
 
                       <button
-                        onClick={saveUser}
-                        disabled={isAddingData} // Disable button only when data added
+                        onClick={(e) => saveUser(e, onClose)}
+                        disabled={isAddingData}
                         className="btn btn-primary btn-user btn-block mt-5"
                       >
                         {isAddingData ? "Adding Data..." : "Add Data"}

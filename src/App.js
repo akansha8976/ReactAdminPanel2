@@ -3,23 +3,21 @@ import { Route, Routes } from "react-router-dom";
 
 import "./css/sb-admin-2.css";
 import "./css/sb-admin-2.min.css";
-import SbAdmin from "./components/sideBarComponents/SbAdmin";
-import TopNavBar from "./components/topNavBar/TopNavBar";
-import AddPage from "./components/pages/AddPage";
-import Footer from "./components/Footer";
-import DashPage from "./components/pages/DashPage";
-import FetchApi from "./components/pages/FetchApi";
-import EditPage from "./components/pages/EditPage";
+import SbAdmin from "./components/sideBarComponents/SbAdmin/SbAdmin";
+import TopNavBar from "./components/topNavBar/topNavBar/TopNavBar";
+import AddPage from "./pages/Add/AddPage";
+import Footer from "./components/Footer/Footer";
+import DashPage from "./pages/Dashboard/DashPage";
+import Get from "./pages/Get/Get";
+import EditPage from "./pages/Edit/EditPage";
 
 const App = () => {
   return (
     <>
       <div id="wrapper">
-        {/* <!-- Sidebar --> */}
         <SbAdmin />
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
-            {/* <!-- Topbar --> */}
             <TopNavBar />
 
             <Routes>
@@ -29,7 +27,7 @@ const App = () => {
 
               <Route path="/Editpage/:_id" element={<EditPage />}></Route>
 
-              <Route path="/fetchapi" element={<FetchApi />}></Route>
+              <Route path="/Get" element={<Get />}></Route>
             </Routes>
           </div>
           <Footer />

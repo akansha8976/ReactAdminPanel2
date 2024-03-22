@@ -1,9 +1,9 @@
 import React from "react";
-import DashBoardCard from "../dashboardComponents/DashBoardCard";
-import PieChart from "../dashboardComponents/PieChart";
-import AreaChart from "../dashboardComponents/AreaChart";
+import DashBoardCard from "../../components/dashboardComponents/DashBoardCard";
+import PieChart from "../../components/dashboardComponents/PieChart";
+import AreaChart from "../../components/dashboardComponents/AreaChart";
 
-import ProjectsDashBoard from "../dashboardComponents/ProjectsDashBoard";
+import ProjectsDashBoard from "../../components/dashboardComponents/ProjectsDashBoard";
 function DashBoard() {
   return (
     <>

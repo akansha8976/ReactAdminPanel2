@@ -1,92 +1,45 @@
-// import React from "react";
-
-// function TableHeading() {
-//   const tableHeading = [
-//     {
-//       id: 1,
-//       name: "Id",
-//     },
-//     {
-//       id: 2,
-//       name: "Description",
-//     },
-//     {
-//       id: 3,
-//       name: "Created at",
-//     },
-//     {
-//       id: 4,
-//       name: "Updated at",
-//     },
-//     {
-//       id: 5,
-//       name: "Edit/Delete",
-//     },
-//   ];
-//   return (
-//     <>
-//       {tableHeading.map((item) => {
-//         return (
-//           <>
-//             <th  onClick={() => handleSort("id")}>{item.name}</th>
-//           </>
-//         );
-//       })}
-//     </>
-//   );
-// }
-
-// export default TableHeading;
-// TableHeading.js
-
-// import React from "react";
-
-// const TableHeading = ({ handleSort }) => {
-//   return (
-//     <>
-//       <th onClick={() => handleSort("id")}>ID</th>
-//       <th onClick={() => handleSort("description")}>Description </th>
-//       <th onClick={() => handleSort("createdAt")}>Created At</th>
-//       <th onClick={() => handleSort("updatedAt")}>Updated At</th>
-//       <th>Actions</th>
-//     </>
-//   );
-// };
-
-// export default TableHeading;
-// TableHeading.js
-
 import React from "react";
-import { FaSortUp, FaSortDown } from "react-icons/fa";
 
-const TableHeading = ({ handleSort, sortConfig }) => {
+function TableHeading({ sortItems }) {
   return (
     <>
-      <th onClick={() => handleSort("id")}>ID</th>
-      <th onClick={() => handleSort("description")}>
-        Description{" "}
-        {sortConfig.key === "description" &&
-          sortConfig.direction === "ascending" && <FaSortUp />}
-        {sortConfig.key === "description" &&
-          sortConfig.direction === "descending" && <FaSortDown />}
+      <th>ID</th>
+      <th>
+        Description
+        <i
+          className=" ms-2 fa-solid fa-arrow-up"
+          onClick={() => sortItems({ key: 0, ascending: true })}
+        />
+        <i
+          className=" fa-solid fa-arrow-down"
+          onClick={() => sortItems({ key: 0, ascending: false })}
+        />
       </th>
-      <th onClick={() => handleSort("createdAt")}>
-        Created At{" "}
-        {sortConfig.key === "createdAt" &&
-          sortConfig.direction === "ascending" && <FaSortUp />}
-        {sortConfig.key === "createdAt" &&
-          sortConfig.direction === "descending" && <FaSortDown />}
+      <th>
+        Created at
+        <i
+          className=" ms-2 fa-solid fa-arrow-up  "
+          onClick={() => sortItems({ key: 1, ascending: true })}
+        />
+        <i
+          className=" fa-solid fa-arrow-down"
+          onClick={() => sortItems({ key: 1, ascending: false })}
+        />
       </th>
-      <th onClick={() => handleSort("updatedAt")}>
-        Updated At{" "}
-        {sortConfig.key === "updatedAt" &&
-          sortConfig.direction === "ascending" && <FaSortUp />}
-        {sortConfig.key === "updatedAt" &&
-          sortConfig.direction === "descending" && <FaSortDown />}
+      <th>
+        Updated at
+        <i
+          className="ms-2 fa-solid fa-arrow-up "
+          onClick={() => sortItems({ key: 2, ascending: true })}
+        />
+        <i
+          className=" fa-solid fa-arrow-down"
+          onClick={() => sortItems({ key: 2, ascending: false })}
+        />
       </th>
-      <th>Actions</th>
+      <th>Edit/Delete</th>
     </>
   );
-};
+}
 
 export default TableHeading;
