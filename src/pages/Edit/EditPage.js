@@ -77,8 +77,9 @@ function EditPage({ itemId, onClose, tempDescription }) {
               <div className="card-body p-0">
                 <div className="row " style={{ height: "350px" }}>
                   <i
-                    className="fa-solid fa-xmark text-end me-2"
+                    className="fa-solid fa-xmark text-end mt-2"
                     onClick={onClose}
+                    style={{ marginLeft: "inherit" }}
                   />
                   <div className="col-lg-10 ms-5">
                     <div className="p-5">

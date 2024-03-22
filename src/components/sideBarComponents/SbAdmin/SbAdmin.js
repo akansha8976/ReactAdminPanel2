@@ -167,11 +167,7 @@ function SbAdmin() {
           </div>
         </li>
 
-        <NavLinks
-          icon="fas fa-fw fa-chart-area"
-          name="Add Page"
-          route="addpage"
-        />
+        <NavLinks icon="fas fa-fw fa-chart-area" name="charts" route="/" />
 
         <NavLinks icon="fas fa-fw fa-table" name="Table" route="/get" />
 

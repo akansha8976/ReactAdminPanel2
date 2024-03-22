@@ -5,7 +5,7 @@ import "./css/sb-admin-2.css";
 import "./css/sb-admin-2.min.css";
 import SbAdmin from "./components/sideBarComponents/SbAdmin/SbAdmin";
 import TopNavBar from "./components/topNavBar/topNavBar/TopNavBar";
-import AddPage from "./pages/Add/AddPage";
+
 import Footer from "./components/Footer/Footer";
 import DashPage from "./pages/Dashboard/DashPage";
 import Get from "./pages/Get/Get";
@@ -22,8 +22,6 @@ const App = () => {
 
             <Routes>
               <Route path="*" element={<DashPage />}></Route>
-
-              <Route path="/addpage" element={<AddPage />}></Route>
 
               <Route path="/Editpage/:_id" element={<EditPage />}></Route>
 
