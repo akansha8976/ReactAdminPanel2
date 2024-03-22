@@ -1,8 +1,7 @@
 import React from "react";
 import { color, progressbar } from "./ProjectDashBoardData";
-import ColorsDashboard from "./ColorsDashboard";
-import ProgreeBarDashBoard from "./ProgreeBarDashBoard";
-import DashBoardIllustration from "./DashBoardIllustration";
+
+import { Illustration, ProgreeBar, Colors } from "./DashBoardFunctions";
 
 function ProjectsDashBoard() {
   return (
@@ -17,7 +16,7 @@ function ProjectsDashBoard() {
               {progressbar.map((item) => {
                 return (
                   <>
-                    <ProgreeBarDashBoard item={item} />
+                    <ProgreeBar item={item} />
                   </>
                 );
               })}
@@ -26,12 +25,12 @@ function ProjectsDashBoard() {
           {/* <!-- Color System --> */}
           <div className="row">
             {color.map((item) => {
-              return <ColorsDashboard item={item} />;
+              return <Colors item={item} />;
             })}
           </div>
         </div>
 
-        <DashBoardIllustration />
+        <Illustration />
       </div>
     </>
   );

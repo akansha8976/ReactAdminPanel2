@@ -6,10 +6,10 @@ import "./css/sb-admin-2.min.css";
 import SbAdmin from "./components/sideBarComponents/SbAdmin/SbAdmin";
 import TopNavBar from "./components/topNavBar/topNavBar/TopNavBar";
 
-import Footer from "./components/Footer/Footer";
-import DashPage from "./pages/Dashboard/DashPage";
-import Get from "./pages/Get/Get";
-import EditPage from "./pages/Edit/EditPage";
+import Footer from "./components/footer/Footer";
+import DashPage from "./pages/dashboard/DashBoard";
+import Get from "./pages/get/Get";
+import EditPage from "./pages/edit/Edit";
 
 const App = () => {
   return (

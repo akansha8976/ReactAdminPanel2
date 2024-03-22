@@ -8,7 +8,7 @@ import {
   componentsData,
 } from "../SbAdminComponents/SbAdminData";
 import NavLinks from "../SbAdminComponents/NavLinks";
-import SidebarDropDown from "./SidebarDropDown";
+import SidebarDropDown from "../SbAdminComponents/SidebarDropDown";
 function SbAdmin() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

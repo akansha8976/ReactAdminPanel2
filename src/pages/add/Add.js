@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CustomComponent from "../../components/Add&EditForm/Form";
-import { validateDescription } from "../../components/Validation/Validation";
+import CustomComponent from "../../components/add&EditForm/Form";
+import { validateDescription } from "../../components/validation/Validation";
 import { savePost } from "../../components/apiFunctions";
 function HelloPage({ onClose }) {
   const [isAddingData, setIsAddingData] = useState(false);

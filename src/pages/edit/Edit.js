@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { editPost } from "../../components/apiFunctions";
 import { useParams } from "react-router-dom";
-import CustomComponent from "../../components/Add&EditForm/Form";
-import { validateDescription } from "../../components/Validation/Validation";
+import CustomComponent from "../../components/add&EditForm/Form";
+import { validateDescription } from "../../components/validation/Validation";
 function EditPage({ itemId, onClose, tempDescription }) {
   const [errorMessage1, setErrorMessage1] = useState("");
   const [isAddingData, setIsAddingData] = useState(false);

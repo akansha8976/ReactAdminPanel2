@@ -6,8 +6,8 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import moment from "moment/moment";
 import ReactPaginate from "react-paginate";
-import AddPage from "../Add/AddPage";
-import EditPage from "../Edit/EditPage";
+import AddPage from "../add/Add";
+import EditPage from "../edit/Edit";
 
 function App() {
   const [showAddPopup, setShowAddPopup] = useState(false);
