@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { editPost } from "../../components/apiFunctions";
+import { editPost } from "../../components/tableComponent/ApiFunctions";
 import { useParams } from "react-router-dom";
 import CustomComponent from "../../components/add&EditForm/Form";
 import { validateDescription } from "../../components/validation/Validation";
@@ -24,13 +24,14 @@ function EditPage({ itemId, onClose, tempDescription }) {
     getProductDetails();
   }, []);
 
-  const editFunction = async () => {
+  const editFunction = async (e) => {
+    e.preventDefault();
     if (isAddingData) {
       return;
     }
 
     setIsAddingData(true);
-
+    setErrorMessage("");
     const trimmedDescription = description.trim();
     const error = validateDescription(trimmedDescription);
 

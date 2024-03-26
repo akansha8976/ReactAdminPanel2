@@ -1,6 +1,6 @@
 import React from "react";
 
-function DashboardCardStructure({ item }) {
+function CardStructure({ item }) {
   return (
     <div className="col-xl-3 col-md-6 mb-4">
       <div className={item.class1}>
@@ -22,4 +22,4 @@ function DashboardCardStructure({ item }) {
   );
 }
 
-export default DashboardCardStructure;
+export default CardStructure;

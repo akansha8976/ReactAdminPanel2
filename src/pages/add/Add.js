@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomComponent from "../../components/add&EditForm/Form";
 import { validateDescription } from "../../components/validation/Validation";
-import { savePost } from "../../components/apiFunctions";
+import { savePost } from "../../components/tableComponent/ApiFunctions";
 function HelloPage({ onClose }) {
   const [isAddingData, setIsAddingData] = useState(false);
   const [description, setDescription] = useState("");
@@ -22,13 +22,14 @@ function HelloPage({ onClose }) {
       setIsAddingData(false);
       return;
     }
-
+    setErrorMessage("");
     let trimmedDescription = description.trim();
     let data = { description: trimmedDescription };
 
     savePost(data)
       .then(() => {
         setDescription("");
+
         onClose();
         window.location.reload();
       })

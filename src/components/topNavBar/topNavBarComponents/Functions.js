@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { data, alertDropDown } from "./TopNavData";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Loading from "../../Loading";
+import Loading from "../../tableComponent/Loading";
 export function SearchBar() {
   return (
     <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">

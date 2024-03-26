@@ -1,6 +1,6 @@
 import React from "react";
-import DashboardCardStructure from "./DashboardCardStructure";
-import { data, data1 } from "./ProjectDashBoardData";
+import CardStructure from "./CardStructure";
+import { data, data1 } from "./ProjectData";
 function DashBoardCard() {
   return (
     <>
@@ -8,7 +8,7 @@ function DashBoardCard() {
         {data.map((item) => {
           return (
             <>
-              <DashboardCardStructure item={item} />
+              <CardStructure item={item} />
             </>
           );
         })}
@@ -53,7 +53,7 @@ function DashBoardCard() {
         {data1.map((item) => {
           return (
             <>
-              <DashboardCardStructure item={item} />
+              <CardStructure item={item} />
             </>
           );
         })}

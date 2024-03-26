@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GraphDropDown from "./GraphDropDown";
 import Chart from "react-apexcharts";
 
-import { piebar } from "./ProjectDashBoardData";
+import { piebar } from "./ProjectData";
 
 export function PieChart() {
   return (

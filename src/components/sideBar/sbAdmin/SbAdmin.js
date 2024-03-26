@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Loading from "../../Loading";
+import Loading from "../../tableComponent/Loading";
 import { Link } from "react-router-dom";
 import {
   pagesData1,
   utilityData,
   pagesData2,
   componentsData,
-} from "../SbAdminComponents/SbAdminData";
-import NavLinks from "../SbAdminComponents/NavLinks";
-import SidebarDropDown from "../SbAdminComponents/SidebarDropDown";
+} from "../sbAdminComponents/DropDownData";
+import NavLinks from "../sbAdminComponents/NavLinks";
+import SidebarDropDown from "../sbAdminComponents/DropDown";
+
 function SbAdmin() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);

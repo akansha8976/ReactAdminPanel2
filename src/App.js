@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 
 import "./css/sb-admin-2.css";
 import "./css/sb-admin-2.min.css";
-import SbAdmin from "./components/sideBarComponents/SbAdmin/SbAdmin";
-import TopNavBar from "./components/topNavBar/topNavBar/TopNavBar";
 
+import TopNavBar from "./components/topNavBar/topNavBar/TopNavBar";
+import SbAdmin from "./components/sideBar/sbAdmin/SbAdmin";
 import Footer from "./components/footer/Footer";
 import DashPage from "./pages/dashboard/DashBoard";
 import Get from "./pages/get/Get";

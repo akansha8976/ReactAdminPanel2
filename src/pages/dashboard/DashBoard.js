@@ -1,5 +1,5 @@
 import React from "react";
-import DashBoardCard from "../../components/dashboardComponents/DashBoardCard";
+import DashBoardCard from "../../components/dashboardComponents/Card";
 
 import {
   AreaChart,

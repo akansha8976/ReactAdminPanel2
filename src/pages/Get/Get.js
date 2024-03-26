@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import TableHeading from "../../components/TableHeading";
-import Loading from "../../components/Loading";
-import { getPost, deletePost } from "../../components/apiFunctions";
+import TableHeading from "../../components/tableComponent/TableHeading";
+import Loading from "../../components/tableComponent/Loading";
+import {
+  getPost,
+  deletePost,
+} from "../../components/tableComponent/ApiFunctions";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import moment from "moment/moment";
@@ -133,6 +136,7 @@ function App() {
 
                       setCurrentPage(newCurrentPage);
                       window.location.reload();
+
                       setData(res);
                       filterData(searchQuery);
                     } else {

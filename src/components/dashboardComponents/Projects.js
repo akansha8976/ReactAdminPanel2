@@ -1,5 +1,5 @@
 import React from "react";
-import { color, progressbar } from "./ProjectDashBoardData";
+import { color, progressbar } from "./ProjectData";
 
 import { Illustration, ProgreeBar, Colors } from "./DashBoardFunctions";
 
