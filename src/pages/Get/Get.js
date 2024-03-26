@@ -36,7 +36,6 @@ function App() {
     setShowEditPopup(!showEditPopup);
     setShowAddPopup(false);
     setSelectedItemId(_id);
-    // Assuming you have a state variable to store the selected item ID
   };
 
   useEffect(() => {
